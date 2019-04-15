@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "new": "gulp component --component",
-    "dev": "cross-env NODE_ENV='dev' gulp clean && cross-env NODE_ENV='dev'  gulp && cross-env NODE_ENV='dev'  gulp watch",
-    "build": "cross-env NODE_ENV='prod' gulp clean &&cross-env NODE_ENV='prod' gulp",
+    "dev": "cross-env NODE_ENV='dev' gulp clean && cross-env NODE_ENV='dev' gulp && cross-env NODE_ENV='dev' gulp watch",
+    "build": "cross-env NODE_ENV='prod' gulp clean && cross-env NODE_ENV='prod' gulp",
     "clean": "gulp clean"
   },
   "author": "",
