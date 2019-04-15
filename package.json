@@ -1,39 +1,39 @@
 {
-  "name": "wxapp-education",
-  "version": "1.0.0",
-  "description": "教育部小程序",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "new": "gulp component --component",
-    "dev": "cross-env NODE_ENV='dev' gulp clean && cross-env NODE_ENV='dev' gulp && cross-env NODE_ENV='dev' gulp watch",
-    "build": "cross-env NODE_ENV='prod' gulp clean && cross-env NODE_ENV='prod' gulp",
-    "clean": "gulp clean"
-  },
-  "author": "",
-  "license": "ISC",
-  "private": true,
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "cross-env": "^5.2.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-imagemin": "^3.3.0",
-    "gulp-jsonminify": "^1.0.0",
-    "gulp-less": "^3.3.2",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-modify-css-urls": "^2.0.0",
-    "gulp-px2rpx": "^0.2.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-template": "^4.0.0",
-    "gulp-uglify": "^3.0.0",
-    "path": "^0.12.7"
-  },
-  "dependencies": {
-    "cross-spawn": "^5.1.0"
-  }
+    "name": "wxapp-education",
+    "version": "1.0.0",
+    "description": "教育部小程序",
+    "main": "app.js",
+    "scripts": {
+        "new": "gulp component --component",
+        "dev": "cross-env NODE_ENV='dev' gulp clean && gulp router && cross-env NODE_ENV='dev' gulp && cross-env NODE_ENV='dev' gulp watch",
+        "build": "cross-env NODE_ENV='prod' gulp clean && gulp router && cross-env NODE_ENV='prod' gulp",
+        "clean": "gulp clean",
+        "router": "gulp router"
+    },
+    "author": "",
+    "license": "ISC",
+    "private": true,
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1",
+        "cross-env": "^5.2.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^7.0.0",
+        "gulp-clean": "^0.4.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-htmlmin": "^3.0.0",
+        "gulp-imagemin": "^3.3.0",
+        "gulp-jsonminify": "^1.0.0",
+        "gulp-less": "^3.3.2",
+        "gulp-load-plugins": "^1.5.0",
+        "gulp-modify-css-urls": "^2.0.0",
+        "gulp-px2rpx": "^0.2.2",
+        "gulp-rename": "^1.2.2",
+        "gulp-template": "^4.0.0",
+        "gulp-uglify": "^3.0.0",
+        "path": "^0.12.7"
+    },
+    "dependencies": {
+        "cross-spawn": "^5.1.0"
+    }
 }
