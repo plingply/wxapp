@@ -146,42 +146,33 @@ gulp.task("component", () => {
 
 // 遍历路由文件夹
 function walk(dir, str) {
-    // 分包
-    if (str) {
-        var results = []
-        var list = fs.readdirSync(dir)
-        list.forEach(function(file) {
-            file = dir + '/' + file
-            var stat = fs.statSync(file)
-            if (stat && stat.isDirectory()) {
-                results = results.concat(walk(file, str))
-            } else if (file.indexOf('.json') != -1) {
+
+    var results = []
+    var list = fs.readdirSync(dir)
+    list.forEach(function(file) {
+        file = dir + '/' + file
+        var stat = fs.statSync(file)
+        if (stat && stat.isDirectory()) {
+            results = results.concat(walk(file, str))
+        } else if (file.indexOf('.json') != -1) {
+            if (str) {
                 var na = file.split('.json')[0].split(str)[1]
                 na = na.substr(1)
                 results.push(na)
+            } else {
+                results.push(file.split('.json')[0].split('src/')[1])
             }
-        })
-        return results
-    } else {
-        // pages
-        var results = []
-        var list = fs.readdirSync(dir)
-        list.forEach(function(file) {
-            file = dir + '/' + file
-            var stat = fs.statSync(file)
-            if (stat && stat.isDirectory()) results = results.concat(walk(file))
-            else file.indexOf('.json') != -1 ? results.push(file.split('.json')[0].split('src/')[1]) : ""
-        })
-        return results
-    }
 
+        }
+    })
+    return results
 }
 
 // 生成路由
 gulp.task("router", () => {
     var app = require("./src/app.json");
-    app.pages = walk(config.pages)
     var sub = []
+    app.pages = walk(config.pages)
     config.subpackages.forEach(item => {
         var obj = {}
         obj.root = item.split('src/')[1]
