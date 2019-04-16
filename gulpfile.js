@@ -119,11 +119,17 @@ let resolveToComponents = function(glob = "") {
 
 //模版创建
 gulp.task("component", () => {
-    let componentInfo = yargs.argv.component.split(":");
-    let name = componentInfo[0]; //获取要创建的文件名称
-    let parentPath = (componentInfo.length > 1 && componentInfo[1]) || ""; //获取父文件夹名称
+    let componentInfo = yargs.argv.component.split("@");
+    let component = componentInfo[0].split(":");
+    let name = component[0]; //获取要创建的文件名称
+    let parentPath = (component.length > 1 && component[1]) || ""; //获取父文件夹名称
     let fileName = name.replace(/([A-Z])/g, "-$1").toLowerCase(); //文件夹名称转换成小写
-    let destPath = path.join(resolveToComponents(), parentPath, fileName); //文件夹创建
+    let destPath = ''
+    if (componentInfo[1]) {
+        destPath = path.join('src', componentInfo[1], parentPath, fileName); //文件夹创建
+    } else {
+        destPath = path.join(resolveToComponents(), parentPath, fileName); //文件夹创建
+    }
 
     return gulp
         .src("generator/component/*.**")
