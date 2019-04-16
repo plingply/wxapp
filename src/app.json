@@ -1,1 +1,1 @@
-{"pages":["pages/home/home","pages/index/index","pages/lin/lin","pages/penglinx/lins/lins"],"window":{"backgroundTextStyle":"light","navigationBarBackgroundColor":"#fff","navigationBarTitleText":"WeChat","navigationBarTextStyle":"black"},"subpackages":[{"root":"subpackage1","pages":[]}]}
+{ "pages": ["pages/home/home", "pages/index/index", "pages/lin/lin", "pages/penglinx/lins/lins"], "window": { "backgroundTextStyle": "light", "navigationBarBackgroundColor": "#fff", "navigationBarTitleText": "WeChat", "navigationBarTextStyle": "black" } }

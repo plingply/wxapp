@@ -184,7 +184,7 @@ gulp.task("router", () => {
         obj.pages = walk(item, obj.root)
         sub.push(obj)
     })
-    app.subpackages = sub
+    sub.length > 0 ? app.subpackages = sub : delete app.subpackages
     fs.writeFileSync('src/app.json', JSON.stringify(app), function(err) {
         if (err) {
             console.error(err);
