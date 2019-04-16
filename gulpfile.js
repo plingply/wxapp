@@ -7,7 +7,8 @@ var gulp = require("gulp"),
     clean = require("gulp-clean"),
     px2rpx = require("gulp-px2rpx"),
     fs = require('fs'),
-    env = process.env.NODE_ENV
+    env = process.env.NODE_ENV,
+    config = require("./config/buildConfig")
 
 /*
  * 常用方法
@@ -91,7 +92,7 @@ gulp.task("config", () => {
         gulp
         .src(["config/" + env + ".js"])
         // .pipe(plugins.jsonminify())
-        .pipe(plugins.rename({ basename: "env" }))
+        .pipe(plugins.rename({ basename: "config" }))
         .pipe(gulp.dest("dist/config"))
     );
 });
@@ -144,23 +145,50 @@ gulp.task("component", () => {
 });
 
 // 遍历路由文件夹
-function walk(dir) {
-    var results = []
-    var list = fs.readdirSync(dir)
-    list.forEach(function(file) {
-        file = dir + '/' + file
-        var stat = fs.statSync(file)
-        if (stat && stat.isDirectory()) results = results.concat(walk(file))
-        else file.indexOf('.html') != -1 ? results.push(file.split('.html')[0].split('src/')[1]) : ""
-    })
-    return results
-}
+function walk(dir, str) {
+    // 分包
+    if (str) {
+        var results = []
+        var list = fs.readdirSync(dir)
+        list.forEach(function(file) {
+            file = dir + '/' + file
+            var stat = fs.statSync(file)
+            if (stat && stat.isDirectory()) {
+                results = results.concat(walk(file, str))
+            } else if (file.indexOf('.json') != -1) {
+                var na = file.split('.json')[0].split(str)[1]
+                na = na.substr(1)
+                results.push(na)
+            }
+        })
+        return results
+    } else {
+        // pages
+        var results = []
+        var list = fs.readdirSync(dir)
+        list.forEach(function(file) {
+            file = dir + '/' + file
+            var stat = fs.statSync(file)
+            if (stat && stat.isDirectory()) results = results.concat(walk(file))
+            else file.indexOf('.json') != -1 ? results.push(file.split('.json')[0].split('src/')[1]) : ""
+        })
+        return results
+    }
 
+}
 
 // 生成路由
 gulp.task("router", () => {
     var app = require("./src/app.json");
-    app.pages = walk('src/pages')
+    app.pages = walk(config.pages)
+    var sub = []
+    config.subpackages.forEach(item => {
+        var obj = {}
+        obj.root = item.split('src/')[1]
+        obj.pages = walk(item, obj.root)
+        sub.push(obj)
+    })
+    app.subpackages = sub
     fs.writeFileSync('src/app.json', JSON.stringify(app), function(err) {
         if (err) {
             console.error(err);
