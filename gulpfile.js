@@ -113,10 +113,8 @@ gulp.task("watch", () => {
 });
 
 //路径
-let root = "src";
-
 let resolveToComponents = function(glob = "") {
-    return path.join(root, "pages", glob); // app/components/{glob}
+    return path.join(config.pages, glob); // app/components/{glob}
 };
 
 //模版创建
