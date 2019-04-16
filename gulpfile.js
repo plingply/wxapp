@@ -25,29 +25,30 @@ var gulp = require("gulp"),
 
 //定义拷贝文件
 gulp.task("html", function() {
-    return
-    gulp
+    return (
+        gulp
         .src("src/**/*.html")
         // .pipe(plugins.htmlmin())
         .pipe(plugins.rename({ extname: ".wxml" }))
         .pipe(gulp.dest("dist/"))
+    )
 
 });
 
 //图片压缩
 gulp.task("img", function() {
-    return
-    gulp
+    return (
+        gulp
         .src("src/images/**/*")
         .pipe(plugins.imagemin())
         .pipe(gulp.dest("dist/images"))
-
+    )
 });
 
 //js解析压缩
 gulp.task("js", function() {
-    return
-    gulp
+    return (
+        gulp
         .src("src/**/*.js")
         .pipe(
             babel({
@@ -56,16 +57,17 @@ gulp.task("js", function() {
         )
         // .pipe(plugins.uglify())
         .pipe(gulp.dest("dist"))
+    )
 
 });
 //less解析css
 gulp.task("less", () => {
-    return
-    gulp
+    return (
+        gulp
         .src(["src/**/*.less"])
         .pipe(plugins.less())
 
-    .pipe(
+        .pipe(
             px2rpx({
                 screenWidth: 750, // 设计稿屏幕, 默认750
                 wxappScreenWidth: 750, // 微信小程序屏幕, 默认750
@@ -74,26 +76,29 @@ gulp.task("less", () => {
         )
         .pipe(plugins.rename({ extname: ".wxss" }))
         .pipe(gulp.dest("dist"))
+    )
 
 });
 
 //json解析压缩
 gulp.task("json", () => {
-    return
-    gulp
+    return (
+        gulp
         .src(["src/**/*.json"])
         // .pipe(plugins.jsonminify())
         .pipe(gulp.dest("dist"))
+    )
 
 });
 
 gulp.task("config", () => {
-    return
-    gulp
+    return (
+        gulp
         .src(["config/" + env + ".js"])
         // .pipe(plugins.jsonminify())
         .pipe(plugins.rename({ basename: "config" }))
         .pipe(gulp.dest("dist/config"))
+    )
 });
 
 
