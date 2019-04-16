@@ -173,6 +173,7 @@ gulp.task("router", () => {
     var app = require("./src/app.json");
     var sub = []
     app.pages = walk(config.pages)
+    config.subpackages = config.subpackages ? config.subpackages : []
     config.subpackages.forEach(item => {
         var obj = {}
         obj.root = item.split('src/')[1]
